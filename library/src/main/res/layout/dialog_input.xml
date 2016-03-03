@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:text="插入文字"/>
+
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@null"
+            android:layout_below="@+id/title"
+            android:gravity="top"
+            android:hint="插入文字内容..."
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/sureBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="确定"
+            />
+    </RelativeLayout>
+</RelativeLayout>
