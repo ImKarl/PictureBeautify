@@ -34,7 +34,6 @@ import com.im4j.picturebeautify.editimage.utils.PhotoUtils;
  * 
  */
 public class FliterListFragment extends Fragment {
-	public static final String TAG = FliterListFragment.class.getName();
 	private View mainView;
 	private View backBtn;// 返回主菜单按钮
 
@@ -42,7 +41,6 @@ public class FliterListFragment extends Fragment {
 	private EditImageActivity activity;
 
 	private LinearLayout mFilterGroup;// 滤镜列表
-	private String[] fliters = PhotoUtils.FILTERS;
 	private Bitmap currentBitmap;// 标记变量
 
 	public static FliterListFragment newInstance(EditImageActivity activity) {
@@ -192,13 +190,14 @@ public class FliterListFragment extends Fragment {
 		params.leftMargin = 20;
 		params.rightMargin = 20;
 		mFilterGroup.removeAllViews();
-		for (int i = 0, len = fliters.length; i < len; i++) {
+
+		for (String key : PhotoUtils.FILTERS.keySet()) {
 			TextView text = new TextView(activity);
 			text.setTextColor(Color.WHITE);
 			text.setTextSize(20);
-			text.setText(fliters[i]);
+			text.setText(key);
 			mFilterGroup.addView(text, params);
-			text.setTag(i);
+			text.setTag(key);
 			text.setOnClickListener(new FliterClick());
 		}// end for i
 	}
@@ -217,15 +216,10 @@ public class FliterListFragment extends Fragment {
 	private final class FliterClick implements OnClickListener {
 		@Override
 		public void onClick(View v) {
-			int position = ((Integer) v.getTag()).intValue();
-			if (position == 0) {// 原始图片效果
-				activity.mainImage.setImageBitmap(activity.mainBitmap);
-				currentBitmap = activity.mainBitmap;
-				return;
-			}
+			String key = String.valueOf(v.getTag());
 			// 滤镜处理
 			ProcessingImage task = new ProcessingImage();
-			task.execute(position);
+			task.execute(key);
 		}
 	}// end inner class
 
@@ -236,20 +230,19 @@ public class FliterListFragment extends Fragment {
 	 * 
 	 */
 	private final class ProcessingImage extends
-			AsyncTask<Integer, Void, Bitmap> {
+			AsyncTask<String, Void, Bitmap> {
 		private Dialog dialog;
 		private Bitmap srcBitmap;
 
 		@Override
-		protected Bitmap doInBackground(Integer... params) {
-			int type = params[0];
+		protected Bitmap doInBackground(String... params) {
+			String key = params[0];
 			if (srcBitmap != null && !srcBitmap.isRecycled()) {
 				srcBitmap.recycle();
 			}
-
 			srcBitmap = Bitmap.createBitmap(activity.mainBitmap.copy(
 					Bitmap.Config.RGB_565, true));
-			return PhotoUtils.filterPhoto(srcBitmap, type);
+			return PhotoUtils.filterPhoto(getContext(), srcBitmap, key);
 		}
 
 		@Override
