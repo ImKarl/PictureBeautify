@@ -27,10 +27,6 @@ public class FastBitmapDrawable extends Drawable implements IBitmapDrawable {
 		mPaint.setDither( true );
 		mPaint.setFilterBitmap( true );
 	}
-	
-	public FastBitmapDrawable( Resources res, InputStream is ){
-		this(BitmapFactory.decodeStream(is));
-	}
 
 	@Override
 	public void draw( Canvas canvas ) {

@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import com.im4j.picturebeautify.editimage.view.imagezoom.easing.Cubic;
 import com.im4j.picturebeautify.editimage.view.imagezoom.easing.Easing;
 import com.im4j.picturebeautify.editimage.view.imagezoom.graphic.FastBitmapDrawable;
-import com.im4j.picturebeautify.editimage.view.imagezoom.utils.IDisposable;
 
 
 /**
@@ -24,8 +23,7 @@ import com.im4j.picturebeautify.editimage.view.imagezoom.utils.IDisposable;
  * @author alessandro
  * 
  */
-public abstract class ImageViewTouchBase extends ImageView implements
-		IDisposable {
+public abstract class ImageViewTouchBase extends ImageView {
 
 	public interface OnDrawableChangeListener {
 
@@ -985,8 +983,4 @@ public abstract class ImageViewTouchBase extends ImageView implements
 		});
 	}
 
-	@Override
-	public void dispose() {
-		clear();
-	}
 }

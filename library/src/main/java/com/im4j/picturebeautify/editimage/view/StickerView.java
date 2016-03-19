@@ -25,13 +25,11 @@ public class StickerView extends View {
 	private static int STATUS_ROTATE = 3;// 图片旋转状态
 
 	private int imageCount;// 已加入照片的数量
-	private Context mContext;
 	private int currentStatus;// 当前状态
 	private StickerItem currentItem;// 当前操作的贴图数据
 	private float oldx, oldy;
 
 	private Paint rectPaint = new Paint();
-	private Paint boxPaint = new Paint();
 
 	private LinkedHashMap<Integer, StickerItem> bank = new LinkedHashMap<Integer, StickerItem>();// 存贮每层贴图数据
 
@@ -51,7 +49,6 @@ public class StickerView extends View {
 	}
 
 	private void init(Context context) {
-		this.mContext = context;
 		currentStatus = STATUS_IDLE;
 
 		rectPaint.setColor(Color.RED);

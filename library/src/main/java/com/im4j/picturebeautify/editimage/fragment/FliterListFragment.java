@@ -280,13 +280,10 @@ public class FliterListFragment extends Fragment {
 			dialog.show();
 		}
 
-	}// end inner class
-
-	public Bitmap getCurrentBitmap() {
-		return currentBitmap;
 	}
 
 	public void setCurrentBitmap(Bitmap currentBitmap) {
 		this.currentBitmap = currentBitmap;
 	}
+
 }// end class

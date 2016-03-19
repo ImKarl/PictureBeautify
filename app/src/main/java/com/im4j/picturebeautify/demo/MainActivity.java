@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,17 +21,9 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     public static final int SELECT_GALLERY_IMAGE_CODE = 7;
-    public static final int TAKE_PHOTO_CODE = 8;
     public static final int ACTION_REQUEST_EDITIMAGE = 9;
-    public static final int ACTION_STICKERS_IMAGE = 10;
-    private MainActivity context;
     private ImageView imgView;
-    private View openAblum;
-    private View editImage;//
-    private View stickersImage;//
     private Bitmap mainBitmap;
-    public Uri mImageUri;//
-    public String mOutputFilePath;//
     private int imageWidth, imageHeight;//
     private String path;
 
@@ -44,17 +35,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        context = this;
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         imageWidth = (int) ((float) metrics.widthPixels / 1.5);
         imageHeight = (int) ((float) metrics.heightPixels / 1.5);
 
         imgView = (ImageView) findViewById(R.id.img);
-        openAblum = findViewById(R.id.select_ablum);
-        editImage = findViewById(R.id.edit_image);
 
-        openAblum.setOnClickListener(new SelectClick());
-        editImage.setOnClickListener(new EditImageClick());
+        findViewById(R.id.select_ablum).setOnClickListener(new SelectClick());
+        findViewById(R.id.edit_image).setOnClickListener(new EditImageClick());
     }
 
     /**
@@ -94,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            // System.out.println("RESULT_OK");
             switch (requestCode) {
                 case SELECT_GALLERY_IMAGE_CODE://
                     handleSelectFromAblum(data);
@@ -102,22 +89,19 @@ public class MainActivity extends AppCompatActivity {
                 case ACTION_REQUEST_EDITIMAGE://
                     handleEditorImage(data);
                     break;
-            }// end switch
+            }
         }
     }
 
     private void handleEditorImage(Intent data) {
         String newFilePath = data.getStringExtra("save_file_path");
         Toast.makeText(this, "new image path: " + newFilePath, Toast.LENGTH_LONG).show();
-        //System.out.println("newFilePath---->" + newFilePath);
         LoadImageTask loadTask = new LoadImageTask();
         loadTask.execute(newFilePath);
     }
 
     private void handleSelectFromAblum(Intent data) {
-        String filepath = data.getStringExtra("imgPath");
-        path = filepath;
-        // System.out.println("path---->"+path);
+        path = data.getStringExtra("imgPath");
         LoadImageTask task = new LoadImageTask();
         task.execute(path);
     }

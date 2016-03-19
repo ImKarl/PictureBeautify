@@ -118,16 +118,6 @@ public class ImageViewTouch extends ImageViewTouchBase{
 		}
 	}
 
-	// protected float onDoubleTapPost(float scale, float maxZoom) {
-	// if (mDoubleTapDirection == 1) {
-	// mDoubleTapDirection = -1;
-	// return maxZoom;
-	// } else {
-	// mDoubleTapDirection = 1;
-	// return 1f;
-	// }
-	// }
-
 	protected float onDoubleTapPost(float scale, float maxZoom) {
 		if (mDoubleTapDirection == 1) {
 			if ((scale + (mScaleFactor * 2)) <= maxZoom) {
@@ -229,11 +219,6 @@ public class ImageViewTouch extends ImageViewTouchBase{
 		return bitmapScrollRectDelta > SCROLL_DELTA_THRESHOLD;
 	}
 
-	/**
-	 * 
-	 * @author
-	 * 
-	 */
 	public class GestureListener extends
 			GestureDetector.SimpleOnGestureListener {
 

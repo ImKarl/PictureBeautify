@@ -26,7 +26,6 @@ public class CropImageView extends View {
 	private static int STATUS_SCALE = 3;// 缩放状态
 
 	private int CIRCLE_WIDTH = 46;
-	private Context mContext;
 	private float oldx, oldy;
 	private int status = STATUS_IDLE;
 	private int selectedControllerCicle;
@@ -66,7 +65,6 @@ public class CropImageView extends View {
 	}
 
 	private void init(Context context) {
-		mContext = context;
 		mBackgroundPaint = PaintUtil.newBackgroundPaint(context);
 		circleBit = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.sticker_rotate);

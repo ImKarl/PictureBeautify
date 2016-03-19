@@ -41,7 +41,6 @@ import com.im4j.picturebeautify.editimage.view.imagezoom.ImageViewTouchBase;
  * 
  */
 public class CropFragment extends Fragment {
-	public static final String TAG = CropFragment.class.getName();
 	private View mainView;
 	private EditImageActivity activity;
 	private View backToMenu;// 返回主菜单

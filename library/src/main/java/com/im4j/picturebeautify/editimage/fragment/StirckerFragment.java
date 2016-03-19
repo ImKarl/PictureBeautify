@@ -1,14 +1,5 @@
 package com.im4j.picturebeautify.editimage.fragment;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.res.AssetManager;
@@ -33,10 +24,18 @@ import com.im4j.picturebeautify.R;
 import com.im4j.picturebeautify.editimage.EditImageActivity;
 import com.im4j.picturebeautify.editimage.adapter.StickerAdapter;
 import com.im4j.picturebeautify.editimage.adapter.StickerTypeAdapter;
-import com.im4j.picturebeautify.editimage.model.StickerBean;
 import com.im4j.picturebeautify.editimage.utils.Matrix3;
 import com.im4j.picturebeautify.editimage.view.StickerItem;
 import com.im4j.picturebeautify.editimage.view.StickerView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * 贴图分类fragment
@@ -58,7 +57,6 @@ public class StirckerFragment extends Fragment {
     private StickerAdapter mStickerAdapter;// 贴图列表适配器
 
     private LoadStickersTask mLoadStickersTask;
-    private List<StickerBean> stickerBeanList = new ArrayList<StickerBean>();
 
     public static StirckerFragment newInstance(EditImageActivity activity) {
         StirckerFragment fragment = new StirckerFragment();
@@ -148,7 +146,6 @@ public class StirckerFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Integer... params) {
-            stickerBeanList.clear();
             AssetManager assetManager = getActivity().getAssets();
             try {
                 String[] lists =   assetManager.list(STICKER_FOLDER);
@@ -328,7 +325,7 @@ public class StirckerFragment extends Fragment {
      * 保存Bitmap图片到指定文件
      *
      * @param bm
-     * @param name
+     * @param filePath
      */
     public static void saveBitmap(Bitmap bm, String filePath) {
         File f = new File(filePath);
@@ -340,9 +337,6 @@ public class StirckerFragment extends Fragment {
             bm.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.flush();
             out.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
